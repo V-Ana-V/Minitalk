@@ -87,7 +87,7 @@ These concepts are fundamental in UNIX programming and allow for effective contr
 # Now, let's break down the allowed functions mentioned in subject:
 ## `signal`
 #### Purpose
-To set a handler for a signal.<br />
+To set a handler for a signal.
 #### Prototype
 ```c
 void (*signal(int signum, void (*handler)(int)))(int);
@@ -96,7 +96,21 @@ void (*signal(int signum, void (*handler)(int)))(int);
 * **signum**: Signal number.<br />
 * **handler**: Pointer to the signal handling function.<br />
 #### Return value
-Previous signal handler, or SIG_ERR on error.
+* Previous signal handler, or SIG_ERR on error.
+
+
+## `sigemptyset`
+#### Purpose
+The `sigemptyset` function is used in UNIX-like operating systems to initialize a signal set to exclude all signals. A signal set is a data structure used to represent a group of signals. 
+#### Prototype
+```c
+int sigemptyset(sigset_t *set);
+```
+#### Parameters
+* **set**: A pointer to a sigset_t data structure that represents the signal set to be initialized.
+#### Return value
+* Returns 0 on success.
+* Returns -1 on failure and sets errno to indicate the error.
 
 
 
