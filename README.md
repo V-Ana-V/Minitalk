@@ -33,7 +33,7 @@ Sending Signals:
 
 From the command line using kill command:
 
-```
+```bash
 kill -SIGTERM <PID>   # Sends SIGTERM to the process with the specified PID
 kill -9 <PID>         # Sends SIGKILL to forcefully terminate the process
 ```
