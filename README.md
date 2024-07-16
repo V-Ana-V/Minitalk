@@ -8,10 +8,10 @@ A process is an instance of a program that is being executed. Each process has i
 
 ### Key Attributes of a Process:
 **Process ID (PID)**: A unique identifier assigned to each process.<br />
-**Parent Process ID (PPID)**: The PID of the process that created (or spawned) this process.
-**User and Group ID**: Identifiers indicating the user and group ownership of the process.
-**Process State**: The current state of the process (running, sleeping, stopped, etc.).
-**Memory Layout**: Includes the stack, heap, text (code), and data segments.
+**Parent Process ID (PPID)**: The PID of the process that created (or spawned) this process.<br />
+**User and Group ID**: Identifiers indicating the user and group ownership of the process.<br />
+**Process State**: The current state of the process (running, sleeping, stopped, etc.).<br />
+**Memory Layout**: Includes the stack, heap, text (code), and data segments.<br />
 
 ### Examples of Processes:
 A web server (e.g., **httpd** or **nginx**)
