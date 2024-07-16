@@ -91,10 +91,10 @@ These concepts are fundamental in UNIX programming and allow for effective contr
 ```c
 void (*signal(int signum, void (*handler)(int)))(int);
 ```
-#### Parameters:
+#### Parameters
 **signum**: Signal number.<br />
 **handler**: Pointer to the signal handling function.<br />
-#### Return value:
+#### Return value
 Previous signal handler, or SIG_ERR on error.
 
 
