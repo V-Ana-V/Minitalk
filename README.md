@@ -93,8 +93,8 @@ To set a handler for a signal.<br />
 void (*signal(int signum, void (*handler)(int)))(int);
 ```
 #### Parameters
-**signum**: Signal number.<br />
-**handler**: Pointer to the signal handling function.<br />
+***signum**: Signal number.<br />
+***handler**: Pointer to the signal handling function.<br />
 #### Return value
 Previous signal handler, or SIG_ERR on error.
 
