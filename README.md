@@ -2,7 +2,7 @@
 
 ## At first, some terminology:
 
-### Processes in UNIX
+## Processes in UNIX
 ### Definition:
 A process is an instance of a program that is being executed. Each process has its own address space, memory, and resources allocated by the operating system.
 
@@ -18,7 +18,7 @@ A web server (e.g., **httpd** or **nginx**)<br />
 A shell (e.g., **bash** or **zsh**)<br />
 A user application (e.g., a text editor like **vim**)<br />
 
-### Signals in UNIX
+## Signals in UNIX
 ### Definition:
 Signals are a form of inter-process communication (IPC) used to notify processes that a specific event has occurred. Signals can be sent by the operating system, other processes, or the process itself.
 
@@ -37,7 +37,7 @@ kill -SIGTERM <PID>   # Sends SIGTERM to the process with the specified PID
 kill -9 <PID>         # Sends SIGKILL to forcefully terminate the process
 ```
 
-### Signal Handlers
+## Signal Handlers
 ### Definition:
 A signal handler is a function that gets executed in response to a specific signal. When a process receives a signal, it can either:
 
