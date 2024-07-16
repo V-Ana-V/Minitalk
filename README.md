@@ -14,7 +14,7 @@ A process is an instance of a program that is being executed. Each process has i
 **Memory Layout**: Includes the stack, heap, text (code), and data segments.<br />
 
 ### Examples of Processes:
-A web server (e.g., **httpd** or **nginx**)
-A shell (e.g., **bash** or **zsh**)
-A user application (e.g., a text editor like vim)
+A web server (e.g., **httpd** or **nginx**)<br />
+A shell (e.g., **bash** or **zsh**)<br />
+A user application (e.g., a text editor like vim)<br />
 
