@@ -87,14 +87,14 @@ These concepts are fundamental in UNIX programming and allow for effective contr
 # Now, let's break down the allowed functions mentioned in subject:
 ## `signal`
 **Purpose**: To set a handler for a signal.<br />
-### Prototype
+#### Prototype
 ```c
 void (*signal(int signum, void (*handler)(int)))(int);
 ```
-### Parameters:
-**signum**: Signal number.
-**handler**: Pointer to the signal handling function.
-### Return value
+#### Parameters:
+**signum**: Signal number.<br />
+**handler**: Pointer to the signal handling function.<br />
+#### Return value:
 Previous signal handler, or SIG_ERR on error.
 
 
