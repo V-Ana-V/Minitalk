@@ -112,5 +112,16 @@ int sigemptyset(sigset_t *set);
 * Returns 0 on success.
 * Returns -1 on failure and sets errno to indicate the error.
 
+### `sigaddset`
+
+#### Purpose
+The `sigaddset` function is used in UNIX-like operating systems to add a specific signal to a signal set. A signal set is a data structure used to represent a group of signals. Adding a signal to a set means that the signal will be part of the set and can be managed (blocked, unblocked, or checked) by various signal handling functions.
+
+#### Prototype
+```c
+int sigaddset(sigset_t *set, int signum);
+```
+
+
 
 
