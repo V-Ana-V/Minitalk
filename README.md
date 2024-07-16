@@ -1,6 +1,6 @@
 # Minitalk
 
-## At first, some terminology:
+# At first, some terminology:
 
 ## Processes in UNIX
 ### Definition:
@@ -84,5 +84,8 @@ int main() {
 **Handler**: A function that defines how a process responds to a signal.<br />
 These concepts are fundamental in UNIX programming and allow for effective control and communication between processes.<br />
 
+# Now, let's break down the allowed functions mentioned in subject:
+## `signal`
+**Purpose**: To set a handler for a signal.<br />
 
 
