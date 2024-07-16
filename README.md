@@ -37,4 +37,43 @@ kill -SIGTERM <PID>   # Sends SIGTERM to the process with the specified PID
 kill -9 <PID>         # Sends SIGKILL to forcefully terminate the process
 ```
 
+### Signal Handlers
+### Definition:
+A signal handler is a function that gets executed in response to a specific signal. When a process receives a signal, it can either:
+
+**Perform the default action**: Predefined by the operating system (e.g., terminate on SIGINT).<br />
+**Ignore the signal**: The signal will have no effect on the process.<br />
+**Handle the signal**: Execute a custom function defined by the process.<br />
+
+### Setting a Signal Handler:
+You use the signal function to set a signal handler for a particular signal.
+Example Code:
+
+```c
+#include <stdio.h>
+#include <signal.h>
+#include <unistd.h>
+
+// Custom signal handler function
+void handle_signal(int signal) {
+    if (signal == SIGINT) {
+        printf("Received SIGINT (Ctrl+C). Custom handler executed.\n");
+    }
+}
+
+int main() {
+    // Set the signal handler for SIGINT
+    signal(SIGINT, handle_signal);
+
+    // Infinite loop to keep the program running
+    while (1) {
+        printf("Running...\n");
+        sleep(1); // Sleep for a second
+    }
+
+    return 0;
+}
+```
+
+
 
