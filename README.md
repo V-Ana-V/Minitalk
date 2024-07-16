@@ -16,5 +16,26 @@ A process is an instance of a program that is being executed. Each process has i
 ### Examples of Processes:
 A web server (e.g., **httpd** or **nginx**)<br />
 A shell (e.g., **bash** or **zsh**)<br />
-A user application (e.g., a text editor like vim)<br />
+A user application (e.g., a text editor like **vim**)<br />
+
+Signals in UNIX
+Definition:
+Signals are a form of inter-process communication (IPC) used to notify processes that a specific event has occurred. Signals can be sent by the operating system, other processes, or the process itself.
+
+Common Signals:
+
+SIGINT (2): Interrupt signal, usually initiated by the user pressing Ctrl+C.
+SIGTERM (15): Termination signal, used to politely ask a process to terminate.
+SIGKILL (9): Kill signal, forcefully terminates a process without cleanup.
+SIGSTOP (19): Stop signal, pauses the process execution.
+SIGCONT (18): Continue signal, resumes a paused process.
+Sending Signals:
+
+From the command line using kill command:
+
+```
+kill -SIGTERM <PID>   # Sends SIGTERM to the process with the specified PID
+kill -9 <PID>         # Sends SIGKILL to forcefully terminate the process
+```
+
 
