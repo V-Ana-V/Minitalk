@@ -74,6 +74,15 @@ int main() {
     return 0;
 }
 ```
+**Signal Handler Function**: **handle_signal** is a custom function that will be called when the **SIGINT** signal is received.<br />
+**Setting the Handler**: **signal(SIGINT, handle_signal)** sets handle_signal as the handler for **SIGINT**.<br />
+**Infinite Loop**: The program runs an infinite loop, printing "Running..." every second. When Ctrl+C is pressed, instead of terminating, the custom handler prints a message.<br />
+
+## Summary
+**Process**: An executing instance of a program.
+**Signal**: A notification sent to a process to indicate an event.<br />
+**Handler**: A function that defines how a process responds to a signal.<br />
+These concepts are fundamental in UNIX programming and allow for effective control and communication between processes.<br />
 
 
 
