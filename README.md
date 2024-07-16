@@ -18,19 +18,18 @@ A web server (e.g., **httpd** or **nginx**)<br />
 A shell (e.g., **bash** or **zsh**)<br />
 A user application (e.g., a text editor like **vim**)<br />
 
-Signals in UNIX
-Definition:
+### Signals in UNIX
+### Definition:
 Signals are a form of inter-process communication (IPC) used to notify processes that a specific event has occurred. Signals can be sent by the operating system, other processes, or the process itself.
 
-Common Signals:
+### Common Signals:
+**SIGINT (2)**: Interrupt signal, usually initiated by the user pressing Ctrl+C.<br />
+**SIGTERM (15)**: Termination signal, used to politely ask a process to terminate.<br />
+**SIGKILL (9)**: Kill signal, forcefully terminates a process without cleanup.<br />
+**SIGSTOP (19)**: Stop signal, pauses the process execution.<br />
+**SIGCONT (18)**: Continue signal, resumes a paused process.<br />
 
-SIGINT (2): Interrupt signal, usually initiated by the user pressing Ctrl+C.
-SIGTERM (15): Termination signal, used to politely ask a process to terminate.
-SIGKILL (9): Kill signal, forcefully terminates a process without cleanup.
-SIGSTOP (19): Stop signal, pauses the process execution.
-SIGCONT (18): Continue signal, resumes a paused process.
-Sending Signals:
-
+### Sending Signals:
 From the command line using kill command:
 
 ```bash
