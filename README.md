@@ -157,8 +157,8 @@ struct sigaction {
 * **sa_mask**: Specifies a set of signals to be blocked during execution of the signal-catching function. This can be used to prevent other signals from interrupting the handler.
 * **sa_flags**: A set of flags that modify the behavior of the signal. Common flags include:
 * * `SA_RESTART`: Automatically restart certain interrupted system calls.
- * `SA_SIGINFO`: Use sa_sigaction instead of sa_handler for the signal-catching function.
- * `sa_restorer`: Unused in modern systems, reserved for future use or compatibility.
+  * `SA_SIGINFO`: Use sa_sigaction instead of sa_handler for the signal-catching function.
+  * `sa_restorer`: Unused in modern systems, reserved for future use or compatibility.
 #### Return value
 * Returns 0 on success.
 * Returns -1 on failure and sets `errno` to indicate the error.
