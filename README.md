@@ -93,8 +93,8 @@ To set a handler for a signal.
 void (*signal(int signum, void (*handler)(int)))(int);
 ```
 #### Parameters
-* **signum**: Signal number.<br />
-* **handler**: Pointer to the signal handling function.<br />
+* **`signum`**: Signal number.<br />
+* **`handler`**: Pointer to the signal handling function.<br />
 #### Return value
 * Previous signal handler, or SIG_ERR on error.
 
@@ -107,7 +107,7 @@ The `sigemptyset` function is used in UNIX-like operating systems to initialize 
 int sigemptyset(sigset_t *set);
 ```
 #### Parameters
-* **set**: A pointer to a sigset_t data structure that represents the signal set to be initialized.
+* **`set`**: A pointer to a sigset_t data structure that represents the signal set to be initialized.
 #### Return value
 * Returns 0 on success.
 * Returns -1 on failure and sets `errno` to indicate the error.
@@ -121,8 +121,8 @@ The `sigaddset` function is used in UNIX-like operating systems to add a specifi
 int sigaddset(sigset_t *set, int signum);
 ```
 #### Parameters
-* **set**: A pointer to a sigset_t data structure that represents the signal set to which a signal will be added.
-* **signum**: The signal number to be added to the signal set. Signal numbers are defined in `<signal.h>` and typically start with `SIG`, such as `SIGINT`, `SIGTERM`, `SIGKILL`, etc.
+* **`set`**: A pointer to a sigset_t data structure that represents the signal set to which a signal will be added.
+* **`signum`**: The signal number to be added to the signal set. Signal numbers are defined in `<signal.h>` and typically start with `SIG`, such as `SIGINT`, `SIGTERM`, `SIGKILL`, etc.
 #### Return value
 * Returns 0 on success.
 * Returns -1 on failure and sets `errno` to indicate the error.
@@ -136,9 +136,9 @@ The `sigaction` function is used to change the action taken by a process on rece
 int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 ```
 #### Parameters
-* **signum**: The signal number for which the action is to be changed. Signal numbers are defined in `<signal.h>` and typically start with `SIG`, such as `SIGINT`, `SIGTERM`, `SIGKILL`, etc.
-* **act**: A pointer to a `struct sigaction` that specifies the new action for the signal.
-* **oldact**: A pointer to a `struct sigaction` that, if not `NULL`, is used to return the previous action for the signal.
+* **`signum`**: The signal number for which the action is to be changed. Signal numbers are defined in `<signal.h>` and typically start with `SIG`, such as `SIGINT`, `SIGTERM`, `SIGKILL`, etc.
+* **`act`**: A pointer to a `struct sigaction` that specifies the new action for the signal.
+* **`oldact`**: A pointer to a `struct sigaction` that, if not `NULL`, is used to return the previous action for the signal.
 
 #### `struct sigaction`
 The struct sigaction structure specifies the action to be associated with a signal and has the following members:
@@ -163,7 +163,83 @@ struct sigaction {
 * Returns 0 on success.
 * Returns -1 on failure and sets `errno` to indicate the error.
 
+## `kill`
+#### Purpose
+The `kill` function is used to send a signal to a process or a group of processes. It can be used to notify a process to perform a specific action, such as terminating or reloading its configuration. Despite its name, `kill` can send any signal, not just signals that terminate a process.
+#### Prototype
+```c
+int kill(pid_t pid, int sig);
+```
+#### Parameters
+* **`pid`**: Specifies the process or process group to which the signal should be sent.
+* * **`pid > 0`**: The signal is sent to the process with the PID equal to `pid`.
+  * **`pid == 0`**: The signal is sent to all processes in the process group of the sender.
+  * **`pid < -1`**: The signal is sent to all processes in the process group with a process group ID equal to the absolute value of pid.
+  * **`pid == -1`**: The signal is sent to all processes that the sender has permission to send signals to, except for process 1 (init).
+* **`sig`**: Specifies the signal to be sent. Signal numbers are defined in `<signal.h>` and typically start with `SIG`, such as `SIGINT`, `SIGTERM`, `SIGKILL`, etc.
+#### Return value
+* Returns 0 on success.
+* Returns -1 on failure and sets `errno` to indicate the error.
+#### Common Errors
+* `EINVAL`: The signal specified is invalid.
+* `EPERM`: The process does not have permission to send the signal to the target process.
+* `ESRCH`: The target process or process group does not exist.
+#### Example Usage
+Here is an example demonstrating how to use the kill function to send a SIGTERM signal to a specific process:
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
 
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <PID>\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+
+    pid_t pid = (pid_t)atoi(argv[1]);
+
+    // Send SIGTERM to the specified process
+    if (kill(pid, SIGTERM) != 0) {
+        perror("kill");
+        exit(EXIT_FAILURE);
+    }
+
+    printf("Sent SIGTERM to process %d\n", pid);
+
+    return 0;
+}
+```
+
+
+## `getpid`
+#### Purpose
+The `getpid` function is used to obtain the process ID (PID) of the calling process. This unique identifier is used by the operating system to manage and control processes.
+#### Prototype
+```c
+pid_t getpid(void);
+```
+#### Parameters
+The getpid function takes no parameters.
+#### Return value
+Returns the PID of the calling process.
+#### Example Usage
+Here is an example demonstrating how to use the getpid function to obtain and print the PID of the calling process:
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    // Obtain the PID of the current process
+    pid_t pid = getpid();
+
+    // Print the PID
+    printf("The PID of this process is %d\n", pid);
+
+    return 0;
+}
+```
 
 
 
