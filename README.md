@@ -414,25 +414,68 @@ The `exit` function is used to terminate a program immediately. It performs the 
 #### Prototype
 ```c
 void exit(int status);
+```
 
+#### Parameters
+* **status**: An integer value that is returned to the operating system. By convention:
+* * A status of 0 typically indicates successful program completion.
+  * A non-zero status typically indicates an error or abnormal termination.
 
-status: An integer value that is returned to the operating system. By convention:
-A status of 0 typically indicates successful program completion.
-A non-zero status typically indicates an error or abnormal termination.
-Behavior
-Cleanup Operations:
+#### Behavior
+* **Cleanup Operations**:
+* The exit function first calls any functions registered with atexit in the reverse order of their registration.
+* It flushes and closes all open streams.
+* It performs any necessary cleanup of the standard I/O libraries.
 
-The exit function first calls any functions registered with atexit in the reverse order of their registration.
-It flushes and closes all open streams.
-It performs any necessary cleanup of the standard I/O libraries.
-Termination:
+#### Termination:
+* Finally, `exit` terminates the process and returns the status code to the operating system.
 
-Finally, exit terminates the process and returns the status code to the operating system.
-Return Value
-The exit function does not return. It terminates the calling process.
+#### Return Value
+* The `exit` function does not return. It terminates the calling process.
 
-Example Usage
+#### Example Usage
 Here is an example demonstrating how to use the exit function to terminate a program and return a status code:
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+void cleanup(void) {
+    printf("Cleanup function called.\n");
+}
+
+int main() {
+    // Register the cleanup function to be called at exit
+    atexit(cleanup);
+
+    printf("This is the main function.\n");
+
+    // Terminate the program with a status code of 0 (success)
+    exit(0);
+
+    // This line will not be executed
+    printf("This will not be printed.\n");
+
+    return 0;  // This line is redundant because exit does not return
+}
+```
+or without atexit:
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    printf("This is the main function.\n");
+
+    // Terminate the program with a status code of 0 (success)
+    exit(0);
+
+    // This line will not be executed
+    printf("This will not be printed.\n");
+
+    return 0;  // This line is redundant because exit does not return
+}
+```
+
 
 
 
