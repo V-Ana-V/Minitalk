@@ -292,6 +292,90 @@ After the signal handler completes execution (or if the signal has the default a
 pause always returns with an error (-1) and sets errno to EINTR, indicating the function was interrupted by a signal.
 
 
+## `sleep`
+
+#### Purpose
+The `sleep` function is used to suspend the execution of the calling process for a specified number of seconds. This is useful for creating delays or pausing the program for a set amount of time.
+
+#### Prototype
+```c
+unsigned int sleep(unsigned int seconds);
+```
+#### Parameters
+* **seconds**: The number of seconds for which the process should be suspended.
+#### Return Value
+Returns the number of seconds left to sleep if interrupted by a signal.
+Returns 0 if the sleep duration has elapsed.
+### Example Usage
+Here is an example demonstrating how to use the sleep function to pause execution for 5 seconds:
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    printf("Sleeping for 5 seconds...\n");
+
+    // Suspend execution for 5 seconds
+    sleep(5);
+
+    printf("Woke up after 5 seconds\n");
+
+    return 0;
+}
+```
+#### Here’s an example to illustrate how to use the return value of `sleep`:
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <signal.h>
+
+// Signal handler function
+void handle_sigint(int sig) {
+    printf("Caught signal %d (SIGINT)\n", sig);
+}
+
+int main() {
+    // Set up the signal handler for SIGINT
+    signal(SIGINT, handle_sigint);
+
+    printf("Sleeping for 5 seconds...\n");
+
+    // Attempt to sleep for 5 seconds
+    unsigned int t = sleep(5);
+
+    // Print the time left to sleep if interrupted
+    printf("Time left to sleep: %u seconds\n", t);
+
+    return 0;
+}
+```
+
+#### Execution example
+* Run the Program:
+Execute the program. If no signal interrupts the sleep, the output will be:
+```c
+Sleeping for 5 seconds...
+Time left to sleep: 0 seconds
+```
+* Interrupt the Sleep:
+* * While the program is sleeping, press Ctrl+C to send a SIGINT signal.
+  * The output will be something like:
+```c
+Sleeping for 5 seconds...
+Caught signal 2 (SIGINT)
+Time left to sleep: 3 seconds
+```
+The exact time left will depend on when the signal was received relative to the start of the sleep period.
+This demonstrates how the return value of sleep can be used to determine if the sleep was interrupted and how much time was left to sleep.
+
+
+
+
+
+
+
+
 
 
 
