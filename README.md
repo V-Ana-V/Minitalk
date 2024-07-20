@@ -242,5 +242,58 @@ int main() {
 ```
 
 
+## `pause`
+#### Purpose
+The `pause` function is used to suspend the execution of the calling process until a signal is received. It is typically used in scenarios where a process needs to wait for a signal to continue execution.
+#### Prototype
+```c
+int pause(void);
+```
+#### Parameters
+The pause function takes no parameters.
+#### Return Value
+The function always returns -1.
+errno is set to `EINTR` (indicating that the call was interrupted by a signal).
+#### Example Usage
+Here is an example demonstrating how to use the pause function to suspend a process until a signal is received:
+```c
+#include <stdio.h>
+#include <signal.h>
+#include <unistd.h>
+
+void handle_sigint(int sig) {
+    printf("Caught signal %d (SIGINT)\n", sig);
+}
+
+int main() {
+    // Set up the signal handler for SIGINT
+    signal(SIGINT, handle_sigint);
+
+    printf("Waiting for SIGINT (press Ctrl+C)...\n");
+
+    // Suspend the process until a signal is received
+    pause();
+
+    printf("Pause returned, process continuing...\n");
+
+    return 0;
+}
+```
+The `pause` function suspends the calling process until a signal is received by relying on the fundamental behavior of the operating system's signal handling mechanism. Here's how it works:
+
+##### Suspension Mechanism:
+When pause is called, the operating system puts the calling process in a "sleep" state, meaning the process will not consume any CPU resources while it is suspended.
+The process remains in this suspended state until it receives a signal.
+##### Signal Handling:
+A signal is an asynchronous notification sent to a process to notify it of an event (e.g., `SIGINT` when the user presses Ctrl+C).
+When a signal is delivered to the process, the operating system temporarily interrupts the process's current state, runs the appropriate signal handler (if one is set), and then resumes the process's execution.
+##### Resuming Execution:
+After the signal handler completes execution (or if the signal has the default action), the pause function returns.
+pause always returns with an error (-1) and sets errno to EINTR, indicating the function was interrupted by a signal.
+
+
+
+
+
 
 
