@@ -370,6 +370,76 @@ The exact time left will depend on when the signal was received relative to the 
 This demonstrates how the return value of sleep can be used to determine if the sleep was interrupted and how much time was left to sleep.
 
 
+## `usleep`
+
+#### Purpose
+The `usleep` function is used to suspend the execution of the calling process for a specified number of microseconds. This function is useful for creating very short delays or for finer control over timing than the `sleep` function, which only supports second-level granularity (can only measure and handle time intervals in whole seconds).
+
+#### Prototype
+```c
+int usleep(useconds_t usec);
+```
+#### Parameters
+* **usec**: The number of microseconds for which the process should be suspended. One second is equivalent to 1,000,000 microseconds.
+#### Return Value
+Returns 0 on success.
+Returns -1 on failure and sets errno to indicate the error.
+#### Example Usage
+Here is an example demonstrating how to use the usleep function to pause execution for 500,000 microseconds (0.5 seconds):
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    printf("Sleeping for 0.5 seconds...\n");
+
+    // Suspend execution for 500,000 microseconds (0.5 seconds)
+    if (usleep(500000) != 0) {
+        perror("usleep");
+        return 1;
+    }
+
+    printf("Woke up after 0.5 seconds\n");
+
+    return 0;
+}
+```
+
+
+## `exit`
+
+#### Purpose
+The `exit` function is used to terminate a program immediately. It performs the necessary cleanup operations and then returns control to the host environment (typically the operating system). This function allows a program to end execution and return a status code to the operating system, indicating whether the program completed successfully or encountered an error.
+
+#### Prototype
+```c
+void exit(int status);
+
+
+status: An integer value that is returned to the operating system. By convention:
+A status of 0 typically indicates successful program completion.
+A non-zero status typically indicates an error or abnormal termination.
+Behavior
+Cleanup Operations:
+
+The exit function first calls any functions registered with atexit in the reverse order of their registration.
+It flushes and closes all open streams.
+It performs any necessary cleanup of the standard I/O libraries.
+Termination:
+
+Finally, exit terminates the process and returns the status code to the operating system.
+Return Value
+The exit function does not return. It terminates the calling process.
+
+Example Usage
+Here is an example demonstrating how to use the exit function to terminate a program and return a status code:
+
+
+
+
+
+
+
 
 
 
